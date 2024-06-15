@@ -109,4 +109,4 @@ df_angles = df_angles.drop(df_angles.columns.difference(drop_list), axis=1)
 horizontal_stack = pd.concat([df_moment, df_angles], axis=1)
 # print(horizontal_stack.describe())
 
-horizontal_stack.to_csv("Momnet_data", sep=',')
+horizontal_stack.to_csv("Moment_data", sep=',')
