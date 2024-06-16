@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib
 moment_data = pd.read_csv("Moment_data_model_17.csv")
 print(moment_data.describe())
+print(moment_data[["knee_angle_r","ankle_angle_r","knee_angle_l","ankle_angle_l"]].describe())
 response = 'knee_angle_r_moment'
 y = moment_data[[response]]
 print(y)
