@@ -1,0 +1,1 @@
+For Rewalking trials, one of the IMU sensors didn't record the signals.
