@@ -55,7 +55,7 @@ def readMotionFile(filename):
 
     return header, labels, data
 
-fileNames = glob.glob('E:/Documents/Stevens/Coursework/Sem 2/ME 800 Project/Github/Machine-Learning-Model-for-Gait-Analysis/Data/P1Data/Joints_Kinetics/*.sto')
+fileNames = glob.glob('C:/Users/ikshw/OneDrive/Desktop/ME 800/Joint Angles and Torques/Python/Data/P1Data/Joints_Kinetics/*.sto')
 Tot_file_data = []
 file_labels_overall = []
 for fileName in fileNames:
@@ -83,7 +83,7 @@ df_moment = df_moment.drop(df_moment.columns.difference(drop_list), axis=1)
 # print(df_moment.describe())
 # print(df_moment)
 
-fileNames = glob.glob('E:/Documents/Stevens/Coursework/Sem 2/ME 800 Project/Github/Machine-Learning-Model-for-Gait-Analysis/Data/P1Data/Joints_Kinematics/*.mot')
+fileNames = glob.glob('C:/Users/ikshw/OneDrive/Desktop/ME 800/Joint Angles and Torques/Python/Data/P1Data/Joints_Kinematics/*.mot')
 Tot_file_data = []
 file_labels_overall = []
 for fileName in fileNames:
