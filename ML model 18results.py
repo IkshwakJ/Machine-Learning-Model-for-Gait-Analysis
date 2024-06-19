@@ -1,12 +1,9 @@
 import pandas as pd
 import matplotlib
-import matplotlib.pyplot as plt
-moment_data = pd.read_csv("Moment_data_model_19.csv")
+moment_data = pd.read_csv("Moment_data_model_18.csv")
 print(moment_data.describe())
 response = 'knee_angle_r_moment'
 y = moment_data[[response]]
-time = moment_data[['time']]
-time = pd.DataFrame(time)
 # print(y)
 predictors = list(moment_data.columns)
 predictors.remove(response)
@@ -49,10 +46,13 @@ y_pred = model.predict(x_test)
 from sklearn.metrics import mean_absolute_error
 print("Mean Squared Error", mean_absolute_error(y_test, y_pred))
 
+moment_data = pd.read_csv("Moment_data_P1_run_1_model_18_results.csv")
+time = moment_data[['time']]
+time = pd.DataFrame(time)
 y_test = pd.DataFrame(moment_data[['knee_angle_r_moment']])
 y_pred = pd.DataFrame(model.predict(moment_data[predictors]))
 results = pd.concat([time, y_test], axis=1)
 results = pd.concat([results, y_pred], axis=1)
 results = results.sort_values('time') 
 print(results)
-results.to_csv("Pred_result_data.csv", sep=',')
+results.to_csv("Pred_result_data_P1.csv", sep=',')
