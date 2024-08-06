@@ -3,7 +3,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 moment_data = pd.read_csv("Moment_data_model_19.csv")
 print(moment_data.describe())
-response = 'knee_angle_r_moment'
+response = 'ankle_angle_l_moment'
 y = moment_data[[response]]
 time = moment_data[['time']]
 time = pd.DataFrame(time)
@@ -24,9 +24,10 @@ predictors.remove('ankle_angle_r_prev_prev')
 predictors.remove('knee_angle_l_prev_prev')
 # predictors.remove('ankle_angle_l_prev')
 predictors.remove('ankle_angle_l_prev_prev')
-predictors.remove('ankle_angle_r_moment')
+predictors.remove('knee_angle_r_moment')
 predictors.remove('knee_angle_l_moment')
-predictors.remove('ankle_angle_l_moment')
+predictors.remove('ankle_angle_r_moment')
+# predictors.remove('ankle_angle_l_moment')
 predictors.remove('knee_angular_vel_r_prev')
 # predictors.remove('knee_angular_vel_r')
 predictors.remove('ankle_angular_vel_r_prev')
@@ -36,7 +37,8 @@ predictors.remove('knee_angular_vel_l_prev')
 predictors.remove('ankle_angular_vel_l_prev')
 # predictors.remove('ankle_angular_vel_l')
 x = moment_data[predictors]
-print(x)
+print(x.columns)
+input()
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state = 1234) 
 from sklearn.linear_model import LinearRegression
@@ -44,6 +46,8 @@ model = LinearRegression().fit(x_train, y_train)
 print("Predictor List: ",predictors)
 print("Model Intercept: ", model.intercept_)
 print("Coeff Values: ", model.coef_)
+# pd.DataFrame(predictors).to_csv("Pred_left_ankle_moment_predictors.csv", sep =',')
+# pd.DataFrame(model.coef_).to_csv("Pred_left_ankle_moment_coeffs.csv", sep =',')
 print("Score: ", model.score(x_test,y_test))
 y_pred = model.predict(x_test)
 from sklearn.metrics import mean_absolute_error
@@ -55,4 +59,4 @@ results = pd.concat([time, y_test], axis=1)
 results = pd.concat([results, y_pred], axis=1)
 results = results.sort_values('time') 
 print(results)
-results.to_csv("Pred_result_data.csv", sep=',')
+# results.to_csv("Pred_result_data.csv", sep=',')

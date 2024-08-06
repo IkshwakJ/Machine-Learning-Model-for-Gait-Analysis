@@ -1,0 +1,3 @@
+Total Used Power On Average:  14.200382470388544
+Total Regenerated Power On Average:  29.369377912066337
+Total Count:  282

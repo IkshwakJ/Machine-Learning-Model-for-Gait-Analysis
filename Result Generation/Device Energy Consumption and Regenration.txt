@@ -1,0 +1,6 @@
+Total Used Power On Average:  2.1912954714660904
+Total Regenerated Power On Average:  -0.8321381669122913
+Total Count:  282
+motr_output_eff = 0.85 #This is the efficency of the motor in using electrical energy to provide output.
+motor_regen_eff = 0.60 #This is the efficency of the motor in using kinetic energy to provide electrical output.
+gear_train_eff = 0.85*0.95 #This is the efficiency of the geartrain that connects the motor to the joint.

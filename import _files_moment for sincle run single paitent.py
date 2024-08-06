@@ -68,7 +68,7 @@ num_rows, num_cols = data.shape
 print(file_labels)
 for i in range(num_rows):
     # print(data[i])
-    if(i>1):
+    if(i>1 and i<(num_rows-1)):
         Tot_file_data.append(data[i])
     # print(np.asarray(Tot_file_data).shape)
 file_labels_overall = file_labels
@@ -98,33 +98,40 @@ for i in range(num_rows):
         temp_1 = data[i]
     elif(i == 1):
         temp_2 = data[i]
+    elif(i == 2):
+        temp_3 = data[i]
     else:
-        row_full = zip(temp_1, temp_2, data[i])
+        row_full = zip(temp_1, temp_2, temp_3, data[i])
         # print(list(row_full))
         row_full = list(chain.from_iterable(row_full))
         Tot_file_data.append(row_full)
         temp_1 = temp_2
-        temp_2 = data[i]
+        temp_2 = temp_3
+        temp_3 = data[i]
 # print(np.asarray(Tot_file_data).shape)
 file_labels_overall = file_labels
 # print(Tot_file_data)
 # print(file_labels_overall)
 df_angles = pd.DataFrame(Tot_file_data)
+print(len(df_angles.columns))
+
 # print(df_angles.shape)
 Added_entry_labels = [x + '_prev_prev' for x in file_labels_overall]
 Added_entry_labels_2 = [x + '_prev' for x in file_labels_overall]
-file_labels_overall = zip(Added_entry_labels, Added_entry_labels_2, file_labels_overall)
+Added_entry_labels_3 = [x + '_next' for x in file_labels_overall]
+file_labels_overall = zip(Added_entry_labels, Added_entry_labels_2, file_labels_overall, Added_entry_labels_3)
 file_labels_overall = list(chain.from_iterable(file_labels_overall))
-# print(file_labels_overall)
+print(len(file_labels_overall))
 df_angles.columns = file_labels_overall
-drop_list = ["time_prev_prev","time_prev",
-             "knee_angle_r_prev_prev","knee_angle_r_prev", "knee_angle_r",
-             "ankle_angle_r_prev_prev", "ankle_angle_r_prev","ankle_angle_r",
-             "knee_angle_l_prev_prev","knee_angle_l_prev","knee_angle_l",
-             "ankle_angle_l_prev_prev","ankle_angle_l_prev","ankle_angle_l"]
+drop_list = ["time_prev_prev","time_prev", "time_next", 
+            "knee_angle_r_prev_prev","knee_angle_r_prev", "knee_angle_r", "knee_angle_r_next", 
+            "ankle_angle_r_prev_prev", "ankle_angle_r_prev","ankle_angle_r", "ankle_angle_r_next", 
+            "knee_angle_l_prev_prev","knee_angle_l_prev","knee_angle_l", "knee_angle_l_next", 
+            "ankle_angle_l_prev_prev","ankle_angle_l_prev","ankle_angle_l", "ankle_angle_l_next"]
 df_angles = df_angles.drop(df_angles.columns.difference(drop_list), axis=1)
+print(df_angles.columns.values)
 horizontal_stack = pd.concat([df_moment, df_angles], axis=1)
-
+print(horizontal_stack.describe())
 # print(horizontal_stack.describe())
 
-horizontal_stack.to_csv("Moment_data_P1_run_1.csv", sep=',')
+horizontal_stack.to_csv("Moment_data_P1_run_1_power_calc2.csv", sep=',')
